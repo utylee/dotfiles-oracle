@@ -1,0 +1,23 @@
+if status is-interactive 
+	set -l rustup_path $HOME/.cargo/bin
+
+	set -q CARGO_HOME
+	and set -l rustup_path $CARGO_HOME/bin
+	# rust 컴파일 중 메모리 부족등으로 멈출 때 시간 확인하는 용도인건지
+	set -l RUSTFLAGS '-C codegen-units=1 -Z time-passes'
+
+	test -d $rustup_path
+	and contains -- $rustup_path $fish_user_paths
+	or set fish_user_paths $fish_user_paths $rustup_path
+
+	function _halostatue_fish_rust_uninstall -e halostatue_fish_rust_uninstall
+		set -l rustup_path $HOME/.cargo/bin
+		set -q CARGO_HOME
+		and set -l rustup_path $CARGO_HOME/bin
+
+		set -l i (contains -i -- $rustup_path $fish_user_paths)
+		and set -e fish_user_paths[$i]
+
+		functions -e (status function)
+	end
+end
