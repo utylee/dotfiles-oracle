@@ -1,6 +1,6 @@
 if status is-interactive
 	# CURSOR
-	echo -ne '\eP\e]12;#207dab\a'	# wsl1
+	echo -ne '\eP\e]12;#b84440\a'	# wsl1
 	#echo -ne '\eP\e]12;#e034a1\a'	# wsl2
 	set fish_greeting ''
 	fish_vi_key_bindings
